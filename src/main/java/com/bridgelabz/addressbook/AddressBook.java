@@ -59,4 +59,32 @@ public class AddressBook {
 
         System.out.println("Contact not found!");
     }
+
+    // UC6 - Search by City
+    public void searchByCity(String city) {
+        boolean found = false;
+        for (ContactPerson person : contactList) {
+            if (person.getCity().equalsIgnoreCase(city)) {
+                System.out.println(person);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No contacts found in this city.");
+        }
+    }
+
+    // UC6 - Search by State
+    public void searchByState(String state) {
+        boolean found = false;
+        for (ContactPerson person : contactList) {
+            if (person.getState().equalsIgnoreCase(state)) {
+                System.out.println(person);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No contacts found in this state.");
+        }
+    }
 }

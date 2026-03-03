@@ -28,6 +28,8 @@ public class ContactPerson {
 
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
+    public String getCity() { return city; }
+    public String getState() { return state; }
 
     public void setAddress(String address) { this.address = address; }
     public void setCity(String city) { this.city = city; }
@@ -36,7 +38,6 @@ public class ContactPerson {
     public void setPhone(String phone) { this.phone = phone; }
     public void setEmail(String email) { this.email = email; }
 
-    // Prevent Duplicate Based on First Name + Last Name
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
