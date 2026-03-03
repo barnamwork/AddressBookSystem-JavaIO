@@ -18,11 +18,9 @@ public class AddressBook {
 
         contactList.add(person);
 
-        // Add to city dictionary
         cityMap.computeIfAbsent(person.getCity(), k -> new ArrayList<>())
                 .add(person);
 
-        // Add to state dictionary
         stateMap.computeIfAbsent(person.getState(), k -> new ArrayList<>())
                 .add(person);
 
@@ -40,7 +38,6 @@ public class AddressBook {
         for (ContactPerson person : contactList) {
             if (person.getFirstName().equalsIgnoreCase(firstName)) {
 
-                // Remove from old maps
                 cityMap.get(person.getCity()).remove(person);
                 stateMap.get(person.getState()).remove(person);
 
@@ -51,7 +48,6 @@ public class AddressBook {
                 person.setPhone(newPhone);
                 person.setEmail(newEmail);
 
-                // Add to new maps
                 cityMap.computeIfAbsent(newCity, k -> new ArrayList<>()).add(person);
                 stateMap.computeIfAbsent(newState, k -> new ArrayList<>()).add(person);
 
@@ -82,7 +78,6 @@ public class AddressBook {
         System.out.println("Contact not found!");
     }
 
-    // UC7 - View Persons by City
     public void viewPersonsByCity(String city) {
         List<ContactPerson> list = cityMap.get(city);
         if (list == null || list.isEmpty()) {
@@ -92,7 +87,6 @@ public class AddressBook {
         list.forEach(System.out::println);
     }
 
-    // UC7 - View Persons by State
     public void viewPersonsByState(String state) {
         List<ContactPerson> list = stateMap.get(state);
         if (list == null || list.isEmpty()) {
@@ -100,5 +94,19 @@ public class AddressBook {
             return;
         }
         list.forEach(System.out::println);
+    }
+
+    // ✅ UC8 - Count by City
+    public void countByCity(String city) {
+        List<ContactPerson> list = cityMap.get(city);
+        int count = (list == null) ? 0 : list.size();
+        System.out.println("Number of persons in city " + city + ": " + count);
+    }
+
+    // ✅ UC8 - Count by State
+    public void countByState(String state) {
+        List<ContactPerson> list = stateMap.get(state);
+        int count = (list == null) ? 0 : list.size();
+        System.out.println("Number of persons in state " + state + ": " + count);
     }
 }
