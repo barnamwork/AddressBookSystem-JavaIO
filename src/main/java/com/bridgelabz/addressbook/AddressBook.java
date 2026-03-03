@@ -17,11 +17,8 @@ public class AddressBook {
 
         contactList.add(person);
 
-        cityMap.computeIfAbsent(person.getCity(), k -> new ArrayList<>())
-                .add(person);
-
-        stateMap.computeIfAbsent(person.getState(), k -> new ArrayList<>())
-                .add(person);
+        cityMap.computeIfAbsent(person.getCity(), k -> new ArrayList<>()).add(person);
+        stateMap.computeIfAbsent(person.getState(), k -> new ArrayList<>()).add(person);
 
         System.out.println("Contact Added Successfully!");
     }
@@ -30,10 +27,32 @@ public class AddressBook {
         contactList.forEach(System.out::println);
     }
 
+    // UC9
     public void sortByName() {
         contactList.sort(Comparator.comparing(ContactPerson::getFirstName,
                 String.CASE_INSENSITIVE_ORDER));
-        System.out.println("Contacts Sorted by First Name:");
+        System.out.println("Sorted by Name:");
+        displayContacts();
+    }
+
+    // UC10
+    public void sortByCity() {
+        contactList.sort(Comparator.comparing(ContactPerson::getCity,
+                String.CASE_INSENSITIVE_ORDER));
+        System.out.println("Sorted by City:");
+        displayContacts();
+    }
+
+    public void sortByState() {
+        contactList.sort(Comparator.comparing(ContactPerson::getState,
+                String.CASE_INSENSITIVE_ORDER));
+        System.out.println("Sorted by State:");
+        displayContacts();
+    }
+
+    public void sortByZip() {
+        contactList.sort(Comparator.comparing(ContactPerson::getZip));
+        System.out.println("Sorted by Zip:");
         displayContacts();
     }
 
@@ -87,7 +106,7 @@ public class AddressBook {
     public void viewPersonsByCity(String city) {
         List<ContactPerson> list = cityMap.get(city);
         if (list == null || list.isEmpty()) {
-            System.out.println("No persons found in this city.");
+            System.out.println("No persons found.");
             return;
         }
         list.forEach(System.out::println);
@@ -96,7 +115,7 @@ public class AddressBook {
     public void viewPersonsByState(String state) {
         List<ContactPerson> list = stateMap.get(state);
         if (list == null || list.isEmpty()) {
-            System.out.println("No persons found in this state.");
+            System.out.println("No persons found.");
             return;
         }
         list.forEach(System.out::println);
@@ -105,12 +124,12 @@ public class AddressBook {
     public void countByCity(String city) {
         List<ContactPerson> list = cityMap.get(city);
         int count = (list == null) ? 0 : list.size();
-        System.out.println("Number of persons in city " + city + ": " + count);
+        System.out.println("Count in City " + city + ": " + count);
     }
 
     public void countByState(String state) {
         List<ContactPerson> list = stateMap.get(state);
         int count = (list == null) ? 0 : list.size();
-        System.out.println("Number of persons in state " + state + ": " + count);
+        System.out.println("Count in State " + state + ": " + count);
     }
 }
