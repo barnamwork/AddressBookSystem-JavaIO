@@ -55,7 +55,6 @@ public class AddressBookMain {
                             address, city, state, zip, phone, email);
 
                     addressBook.addContact(person);
-                    System.out.println("Contact Added Successfully!");
                     break;
 
                 case 2:

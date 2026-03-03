@@ -9,7 +9,14 @@ public class AddressBook {
     private List<ContactPerson> contactList = new ArrayList<>();
 
     public void addContact(ContactPerson person) {
+
+        if (contactList.contains(person)) {
+            System.out.println("Duplicate Contact! Entry Not Allowed.");
+            return;
+        }
+
         contactList.add(person);
+        System.out.println("Contact Added Successfully!");
     }
 
     public void displayContacts() {

@@ -1,5 +1,7 @@
 package com.bridgelabz.addressbook;
 
+import java.util.Objects;
+
 public class ContactPerson {
 
     private String firstName;
@@ -24,9 +26,8 @@ public class ContactPerson {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
 
     public void setAddress(String address) { this.address = address; }
     public void setCity(String city) { this.city = city; }
@@ -34,6 +35,22 @@ public class ContactPerson {
     public void setZip(String zip) { this.zip = zip; }
     public void setPhone(String phone) { this.phone = phone; }
     public void setEmail(String email) { this.email = email; }
+
+    // Prevent Duplicate Based on First Name + Last Name
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof ContactPerson)) return false;
+
+        ContactPerson other = (ContactPerson) obj;
+        return firstName.equalsIgnoreCase(other.firstName) &&
+                lastName.equalsIgnoreCase(other.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName.toLowerCase(), lastName.toLowerCase());
+    }
 
     @Override
     public String toString() {
