@@ -56,6 +56,12 @@ public class ContactPerson {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " (" + city + ", " + state + ", " + zip + ")";
+        return firstName + " " + lastName +
+                ", " + address +
+                ", " + city +
+                ", " + state +
+                ", " + zip +
+                ", " + phone +
+                ", " + email;
     }
 }

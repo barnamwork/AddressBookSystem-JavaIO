@@ -8,6 +8,10 @@ public class AddressBook {
     private Map<String, List<ContactPerson>> cityMap = new HashMap<>();
     private Map<String, List<ContactPerson>> stateMap = new HashMap<>();
 
+    public List<ContactPerson> getContactList() {
+        return contactList;
+    }
+
     public void addContact(ContactPerson person) {
 
         if (contactList.contains(person)) {
@@ -24,36 +28,11 @@ public class AddressBook {
     }
 
     public void displayContacts() {
+        if (contactList.isEmpty()) {
+            System.out.println("No contacts available.");
+            return;
+        }
         contactList.forEach(System.out::println);
-    }
-
-    // UC9
-    public void sortByName() {
-        contactList.sort(Comparator.comparing(ContactPerson::getFirstName,
-                String.CASE_INSENSITIVE_ORDER));
-        System.out.println("Sorted by Name:");
-        displayContacts();
-    }
-
-    // UC10
-    public void sortByCity() {
-        contactList.sort(Comparator.comparing(ContactPerson::getCity,
-                String.CASE_INSENSITIVE_ORDER));
-        System.out.println("Sorted by City:");
-        displayContacts();
-    }
-
-    public void sortByState() {
-        contactList.sort(Comparator.comparing(ContactPerson::getState,
-                String.CASE_INSENSITIVE_ORDER));
-        System.out.println("Sorted by State:");
-        displayContacts();
-    }
-
-    public void sortByZip() {
-        contactList.sort(Comparator.comparing(ContactPerson::getZip));
-        System.out.println("Sorted by Zip:");
-        displayContacts();
     }
 
     public void editContact(String firstName, String newAddress, String newCity,
@@ -80,6 +59,7 @@ public class AddressBook {
                 return;
             }
         }
+
         System.out.println("Contact not found!");
     }
 
@@ -89,6 +69,7 @@ public class AddressBook {
 
         while (iterator.hasNext()) {
             ContactPerson person = iterator.next();
+
             if (person.getFirstName().equalsIgnoreCase(firstName)) {
 
                 cityMap.get(person.getCity()).remove(person);
@@ -106,7 +87,7 @@ public class AddressBook {
     public void viewPersonsByCity(String city) {
         List<ContactPerson> list = cityMap.get(city);
         if (list == null || list.isEmpty()) {
-            System.out.println("No persons found.");
+            System.out.println("No persons found in this city.");
             return;
         }
         list.forEach(System.out::println);
@@ -115,7 +96,7 @@ public class AddressBook {
     public void viewPersonsByState(String state) {
         List<ContactPerson> list = stateMap.get(state);
         if (list == null || list.isEmpty()) {
-            System.out.println("No persons found.");
+            System.out.println("No persons found in this state.");
             return;
         }
         list.forEach(System.out::println);
@@ -124,12 +105,35 @@ public class AddressBook {
     public void countByCity(String city) {
         List<ContactPerson> list = cityMap.get(city);
         int count = (list == null) ? 0 : list.size();
-        System.out.println("Count in City " + city + ": " + count);
+        System.out.println("Number of persons in city " + city + ": " + count);
     }
 
     public void countByState(String state) {
         List<ContactPerson> list = stateMap.get(state);
         int count = (list == null) ? 0 : list.size();
-        System.out.println("Count in State " + state + ": " + count);
+        System.out.println("Number of persons in state " + state + ": " + count);
+    }
+
+    public void sortByName() {
+        contactList.sort(Comparator.comparing(ContactPerson::getFirstName,
+                String.CASE_INSENSITIVE_ORDER));
+        displayContacts();
+    }
+
+    public void sortByCity() {
+        contactList.sort(Comparator.comparing(ContactPerson::getCity,
+                String.CASE_INSENSITIVE_ORDER));
+        displayContacts();
+    }
+
+    public void sortByState() {
+        contactList.sort(Comparator.comparing(ContactPerson::getState,
+                String.CASE_INSENSITIVE_ORDER));
+        displayContacts();
+    }
+
+    public void sortByZip() {
+        contactList.sort(Comparator.comparing(ContactPerson::getZip));
+        displayContacts();
     }
 }
