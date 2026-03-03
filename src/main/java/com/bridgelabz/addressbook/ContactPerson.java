@@ -28,9 +28,12 @@ public class ContactPerson {
 
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
+    public String getAddress() { return address; }
     public String getCity() { return city; }
     public String getState() { return state; }
     public String getZip() { return zip; }
+    public String getPhone() { return phone; }
+    public String getEmail() { return email; }
 
     public void setAddress(String address) { this.address = address; }
     public void setCity(String city) { this.city = city; }
@@ -38,6 +41,17 @@ public class ContactPerson {
     public void setZip(String zip) { this.zip = zip; }
     public void setPhone(String phone) { this.phone = phone; }
     public void setEmail(String email) { this.email = email; }
+
+    public String toCSV() {
+        return firstName + "," +
+                lastName + "," +
+                address + "," +
+                city + "," +
+                state + "," +
+                zip + "," +
+                phone + "," +
+                email;
+    }
 
     @Override
     public boolean equals(Object obj) {

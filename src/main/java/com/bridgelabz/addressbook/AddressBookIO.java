@@ -7,25 +7,26 @@ import java.util.List;
 
 public class AddressBookIO {
 
-    private static final String FILE_PATH = "AddressBook.txt";
+    private static final String FILE_PATH = "AddressBook.csv";
 
-    public static void writeToFile(List<ContactPerson> contactList) {
+    public static void writeToCSV(List<ContactPerson> contactList) {
 
         Path path = Paths.get(FILE_PATH);
 
         try {
-            Files.write(path,
-                    contactList.stream()
-                            .map(ContactPerson::toString)
-                            .toList());
+            List<String> lines = contactList.stream()
+                    .map(ContactPerson::toCSV)
+                    .toList();
 
-            System.out.println("Address Book Written Successfully!");
+            Files.write(path, lines);
+
+            System.out.println("Address Book Written to CSV Successfully!");
         } catch (IOException e) {
-            System.out.println("Error writing file: " + e.getMessage());
+            System.out.println("Error writing CSV: " + e.getMessage());
         }
     }
 
-    public static List<ContactPerson> readFromFile() {
+    public static List<ContactPerson> readFromCSV() {
 
         List<ContactPerson> contacts = new ArrayList<>();
         Path path = Paths.get(FILE_PATH);
@@ -39,21 +40,18 @@ public class AddressBookIO {
 
             for (String line : lines) {
 
-                String[] parts = line.split(", ");
+                String[] parts = line.split(",");
 
                 if (parts.length == 8) {
-
-                    String[] nameParts = parts[0].split(" ");
-
                     ContactPerson person = new ContactPerson(
-                            nameParts[0],
-                            nameParts[1],
+                            parts[0],
                             parts[1],
                             parts[2],
                             parts[3],
                             parts[4],
                             parts[5],
-                            parts[6]
+                            parts[6],
+                            parts[7]
                     );
 
                     contacts.add(person);
@@ -61,7 +59,7 @@ public class AddressBookIO {
             }
 
         } catch (IOException e) {
-            System.out.println("Error reading file: " + e.getMessage());
+            System.out.println("Error reading CSV: " + e.getMessage());
         }
 
         return contacts;
