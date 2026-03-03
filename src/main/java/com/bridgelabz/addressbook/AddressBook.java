@@ -16,4 +16,23 @@ public class AddressBook {
             System.out.println(person);
         }
     }
+
+    public void editContact(String firstName, String newAddress, String newCity,
+                            String newState, String newZip,
+                            String newPhone, String newEmail) {
+
+        for (ContactPerson person : contactList) {
+            if (person.getFirstName().equalsIgnoreCase(firstName)) {
+                person.setAddress(newAddress);
+                person.setCity(newCity);
+                person.setState(newState);
+                person.setZip(newZip);
+                person.setPhone(newPhone);
+                person.setEmail(newEmail);
+                System.out.println("Contact Updated Successfully!");
+                return;
+            }
+        }
+        System.out.println("Contact not found!");
+    }
 }
