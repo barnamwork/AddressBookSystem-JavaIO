@@ -43,7 +43,6 @@ public class ContactPerson {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof ContactPerson)) return false;
-
         ContactPerson other = (ContactPerson) obj;
         return firstName.equalsIgnoreCase(other.firstName) &&
                 lastName.equalsIgnoreCase(other.lastName);

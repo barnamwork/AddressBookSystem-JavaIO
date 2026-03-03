@@ -12,6 +12,16 @@ public class AddressBook {
         return contactList;
     }
 
+    public void loadContacts(List<ContactPerson> contacts) {
+        contactList.clear();
+        cityMap.clear();
+        stateMap.clear();
+
+        for (ContactPerson person : contacts) {
+            addContact(person);
+        }
+    }
+
     public void addContact(ContactPerson person) {
 
         if (contactList.contains(person)) {
@@ -23,8 +33,6 @@ public class AddressBook {
 
         cityMap.computeIfAbsent(person.getCity(), k -> new ArrayList<>()).add(person);
         stateMap.computeIfAbsent(person.getState(), k -> new ArrayList<>()).add(person);
-
-        System.out.println("Contact Added Successfully!");
     }
 
     public void displayContacts() {
@@ -87,7 +95,7 @@ public class AddressBook {
     public void viewPersonsByCity(String city) {
         List<ContactPerson> list = cityMap.get(city);
         if (list == null || list.isEmpty()) {
-            System.out.println("No persons found in this city.");
+            System.out.println("No persons found.");
             return;
         }
         list.forEach(System.out::println);
@@ -96,7 +104,7 @@ public class AddressBook {
     public void viewPersonsByState(String state) {
         List<ContactPerson> list = stateMap.get(state);
         if (list == null || list.isEmpty()) {
-            System.out.println("No persons found in this state.");
+            System.out.println("No persons found.");
             return;
         }
         list.forEach(System.out::println);
@@ -104,14 +112,12 @@ public class AddressBook {
 
     public void countByCity(String city) {
         List<ContactPerson> list = cityMap.get(city);
-        int count = (list == null) ? 0 : list.size();
-        System.out.println("Number of persons in city " + city + ": " + count);
+        System.out.println("Count: " + ((list == null) ? 0 : list.size()));
     }
 
     public void countByState(String state) {
         List<ContactPerson> list = stateMap.get(state);
-        int count = (list == null) ? 0 : list.size();
-        System.out.println("Number of persons in state " + state + ": " + count);
+        System.out.println("Count: " + ((list == null) ? 0 : list.size()));
     }
 
     public void sortByName() {
