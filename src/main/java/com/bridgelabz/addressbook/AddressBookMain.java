@@ -21,7 +21,8 @@ public class AddressBookMain {
             System.out.println("6. View Persons by State");
             System.out.println("7. Count by City");
             System.out.println("8. Count by State");
-            System.out.println("9. Exit");
+            System.out.println("9. Sort Contacts by Name");
+            System.out.println("10. Exit");
             System.out.print("Choose option: ");
 
             int choice = Integer.parseInt(scanner.nextLine());
@@ -51,6 +52,46 @@ public class AddressBookMain {
                     addressBook.addContact(person);
                     break;
 
+                case 2:
+                    System.out.print("Enter First Name to Edit: ");
+                    String editName = scanner.nextLine();
+                    System.out.print("New Address: ");
+                    String newAddress = scanner.nextLine();
+                    System.out.print("New City: ");
+                    String newCity = scanner.nextLine();
+                    System.out.print("New State: ");
+                    String newState = scanner.nextLine();
+                    System.out.print("New Zip: ");
+                    String newZip = scanner.nextLine();
+                    System.out.print("New Phone: ");
+                    String newPhone = scanner.nextLine();
+                    System.out.print("New Email: ");
+                    String newEmail = scanner.nextLine();
+
+                    addressBook.editContact(editName, newAddress, newCity,
+                            newState, newZip, newPhone, newEmail);
+                    break;
+
+                case 3:
+                    System.out.print("Enter First Name to Delete: ");
+                    String deleteName = scanner.nextLine();
+                    addressBook.deleteContact(deleteName);
+                    break;
+
+                case 4:
+                    addressBook.displayContacts();
+                    break;
+
+                case 5:
+                    System.out.print("Enter City: ");
+                    addressBook.viewPersonsByCity(scanner.nextLine());
+                    break;
+
+                case 6:
+                    System.out.print("Enter State: ");
+                    addressBook.viewPersonsByState(scanner.nextLine());
+                    break;
+
                 case 7:
                     System.out.print("Enter City: ");
                     addressBook.countByCity(scanner.nextLine());
@@ -62,11 +103,15 @@ public class AddressBookMain {
                     break;
 
                 case 9:
+                    addressBook.sortByName();
+                    break;
+
+                case 10:
                     running = false;
                     break;
 
                 default:
-                    System.out.println("Use previous options for other operations.");
+                    System.out.println("Invalid choice!");
             }
         }
 

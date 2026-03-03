@@ -5,7 +5,6 @@ import java.util.*;
 public class AddressBook {
 
     private List<ContactPerson> contactList = new ArrayList<>();
-
     private Map<String, List<ContactPerson>> cityMap = new HashMap<>();
     private Map<String, List<ContactPerson>> stateMap = new HashMap<>();
 
@@ -29,6 +28,13 @@ public class AddressBook {
 
     public void displayContacts() {
         contactList.forEach(System.out::println);
+    }
+
+    public void sortByName() {
+        contactList.sort(Comparator.comparing(ContactPerson::getFirstName,
+                String.CASE_INSENSITIVE_ORDER));
+        System.out.println("Contacts Sorted by First Name:");
+        displayContacts();
     }
 
     public void editContact(String firstName, String newAddress, String newCity,
@@ -96,14 +102,12 @@ public class AddressBook {
         list.forEach(System.out::println);
     }
 
-    // ✅ UC8 - Count by City
     public void countByCity(String city) {
         List<ContactPerson> list = cityMap.get(city);
         int count = (list == null) ? 0 : list.size();
         System.out.println("Number of persons in city " + city + ": " + count);
     }
 
-    // ✅ UC8 - Count by State
     public void countByState(String state) {
         List<ContactPerson> list = stateMap.get(state);
         int count = (list == null) ? 0 : list.size();
